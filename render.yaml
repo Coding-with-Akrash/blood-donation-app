@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: blood-donation-department
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.render
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://blood-donation-department.onrender.com
+      - key: EXPOSE_API_DOCS
+        value: "false"
+      - key: SEED_DEMO_DATA
+        value: "false"
